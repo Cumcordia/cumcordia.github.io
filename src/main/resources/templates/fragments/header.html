@@ -1,0 +1,216 @@
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+  <header
+    th:fragment="header"
+    style="
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      width: 100%;
+    "
+  >
+    <div class="header-content">
+      <div style="display: flex; align-items: center">
+        <img
+          src="/static/svg/goldenfish.svg"
+          alt="Логотип Golden Fish"
+          class="logo-image"
+        />
+        <a th:href="@{/}" class="logo">Golden Fish</a>
+      </div>
+
+      <nav class="nav-center">
+        <div
+          class="nav-item"
+          data-tooltip="<div class='tooltip-content'><div class='tooltip-text'>База отдыха «Golden Fish» - место для отдыха с родными и друзьями за пределами города. Расположена на берегу озера Жалтырколь, в 12 км от поста ГАИ по Карагандинской трассе.
+
+На территории есть домики из сруба, беседки, топчаны, бани и кафе с террасой. Доступны катамараны, конные прогулки, дартс. У озера есть пирс и шезлонги. Можно приносить свою еду и напитки.</div><img src='/static/img/preview.jpg' style='position:relative' class='tooltip-image active'/></div>"
+        >
+          <a th:href="@{/#about}" class="nav-button">О нас</a>
+        </div>
+        <div
+          class="nav-item"
+          data-tooltip="<div class='tooltip-content gallery-preview'><div class='gallery-container'><img src='/static/img/1.jpg' class='tooltip-image active'/><img src='/static/img/2.jpg' class='tooltip-image'/><img src='/static/img/3.jpg' class='tooltip-image'/><img src='/static/img/4.jpg' class='tooltip-image'/><img src='/static/img/5.jpg' class='tooltip-image'/><img src='/static/img/6.jpg' class='tooltip-image'/><img src='/static/img/7.jpg' class='tooltip-image'/><div class='gallery-nav'><button class='prev-btn'>❮</button><button class='next-btn'>❯</button></div></div></div>"
+        >
+          <a th:href="@{/#gallery}" class="nav-button">Галерея</a>
+        </div>
+        <div
+          class="nav-item"
+          data-tooltip="+7‒708‒696‒94‒47
++7‒747‒520‒24‒44"
+        >
+          <a th:href="@{/#contact}" class="nav-button">Номер</a>
+        </div>
+      </nav>
+
+      <div class="header-buttons">
+        <a th:href="@{/booking}" class="book-button">Забронировать</a>
+        <a th:href="${user != null ? '/user-dashboard' : '/login'}"
+           class="login-button"
+           th:text="${user != null ? 'Учетная запись' : 'Войти'}">
+          Войти
+        </a>
+
+      </div>
+    </div>
+
+    <div id="shared-tooltip" class="nav-tooltip"></div>
+
+    <style>
+      .nav-item {
+        position: relative;
+        display: inline-block;
+      }
+
+      .nav-tooltip {
+        position: fixed;
+        background-color: rgba(29, 29, 29, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: white;
+        padding: 12px 16px;
+        font-size: 16px;
+        max-width: 600px;
+        white-space: pre-wrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      .tooltip-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .gallery-container {
+        position: relative;
+        width: 300px;
+        height: 200px;
+      }
+
+      .tooltip-text {
+        flex: 1;
+      }
+
+      .tooltip-image {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 4px;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .tooltip-image.active {
+        opacity: 1;
+      }
+
+      .gallery-nav {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+      }
+
+      .gallery-nav button {
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      .nav-tooltip.visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const tooltip = document.getElementById("shared-tooltip");
+        const navItems = document.querySelectorAll(".nav-item");
+
+        let currentImageIndex = 0;
+
+        function showImage(index, container) {
+          const images = container.querySelectorAll(".tooltip-image");
+          images.forEach((img) => img.classList.remove("active"));
+          images[index].classList.add("active");
+        }
+
+        function setupGalleryNavigation(container) {
+          const prevBtn = container.querySelector(".prev-btn");
+          const nextBtn = container.querySelector(".next-btn");
+          const images = container.querySelectorAll(".tooltip-image");
+
+          if (prevBtn && nextBtn) {
+            prevBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              currentImageIndex =
+                (currentImageIndex - 1 + images.length) % images.length;
+              showImage(currentImageIndex, container);
+            });
+
+            nextBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              currentImageIndex = (currentImageIndex + 1) % images.length;
+              showImage(currentImageIndex, container);
+            });
+          }
+        }
+
+        navItems.forEach((item) => {
+          item.addEventListener("mouseenter", function (e) {
+            const tooltipContent = this.getAttribute("data-tooltip");
+            tooltip.innerHTML = tooltipContent;
+
+            const galleryContainer =
+              tooltip.querySelector(".gallery-container");
+            if (galleryContainer) {
+              currentImageIndex = 0;
+              showImage(currentImageIndex, galleryContainer);
+              setupGalleryNavigation(galleryContainer);
+            }
+
+            const rect = this.getBoundingClientRect();
+            const tooltipWidth = tooltip.offsetWidth;
+
+            tooltip.style.left =
+              rect.left + rect.width / 2 - tooltipWidth / 2 + "px";
+            tooltip.style.top = rect.bottom + 8 + "px";
+
+            tooltip.classList.add("visible");
+          });
+
+          item.addEventListener("mouseleave", function (e) {
+            const relatedTarget = e.relatedTarget;
+            if (!relatedTarget || !relatedTarget.closest(".nav-tooltip")) {
+              tooltip.classList.remove("visible");
+            }
+          });
+        });
+
+        tooltip.addEventListener("mouseleave", function () {
+          tooltip.classList.remove("visible");
+        });
+      });
+    </script>
+    <!-- Навигация -->
+    <div class="nav-bar" style="margin-top: 25px">
+      <a th:href="@{/#homes}" class="section-button">Дома</a>
+      <a th:href="@{/#baths}" class="section-button">Бани</a>
+      <a th:href="@{/#gazebos}" class="section-button">Беседки</a>
+      <a th:href="@{/cafe}" class="section-button">Кафе</a>
+      <a th:href="@{/#children-area}" class="section-button">Детский уголок</a>
+      <a th:href="@{/#beach}" class="section-button">Пляж</a>
+    </div>
+  </header>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Golden Fish</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      window.onscroll = function () {
+        const header = document.querySelector("header");
+        if (window.pageYOffset > 0) {
+          header.style.position = "fixed";
+          header.style.top = "0";
+          header.style.width = "100%";
+          header.style.backdropFilter = "blur(8px)";
+          header.style.webkitBackdropFilter = "blur(8px)";
+          header.classList.add("active");
+        } else {
+          header.style.position = "absolute";
+
+          header.style.backdropFilter = "none";
+          header.classList.remove("active");
+          header.style.webkitBackdropFilter = "none";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div th:replace="~{fragments/header}"></div>
+    </div>
+    <!-- Кафе -->
+    <div class="section-cafe" id="cafe">
+      <div class="text-left menu">
+        <h2>Меню кафе</h2>
+        <p>
+          <strong>Пицца</strong>
+          <div class="menu-item">
+            <span class="dish">Пеперони</span>
+            <span class="price">2100₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Донер с курицей</span>
+            <span class="price">1350₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Маргарита</span>
+            <span class="price">2000₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Четыре сезона</span>
+            <span class="price">2500₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Клаб сендвич</span>
+            <span class="price">1050₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Курица с грибами</span>
+            <span class="price">2300₸</span>
+          </div>
+
+          <strong>Блюда</strong>
+          <div class="menu-item">
+            <span class="dish">Крылышки 5 шт</span>
+            <span class="price">2300₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Дымляма</span>
+            <span class="price">2500₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Лагман</span>
+            <span class="price">2500₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Казан кебаб</span>
+            <span class="price">2500₸</span>
+          </div>
+
+          <strong>Напитки</strong>
+          <div class="menu-item">
+            <span class="dish">Лимонад</span>
+            <span class="price">1000₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Мохито</span>
+            <span class="price">1100₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Кола</span>
+            <span class="price">550₸</span>
+          </div>
+          <div class="menu-item">
+            <span class="dish">Пепси</span>
+            <span class="price">550₸</span>
+          </div>
+        </p>
+      </div>
+      <div class="image-right">
+        <img src="/static/img/cafe.png" alt="Кафе" />
+      </div>
+    </div>
+    <div th:replace="~{fragments/footer}"></div>
+  </body>
+</html>

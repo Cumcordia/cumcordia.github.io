@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Golden Fish - Бронирование</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/booking.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div th:replace="~{fragments/header}"></div>
+
+    <div class="booking-container">
+      <div class="container">
+        <section class="booking-section">
+          <h2>Забронировать номер</h2>
+          <form id="filter-form" class="booking-form">
+            <div class="form-group">
+              <label for="date-checkin">Дата заезда</label>
+              <input
+                type="text"
+                id="date-checkin"
+                name="startDate"
+                class="datepicker form-input"
+                placeholder="Выберите дату заезда"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="date-checkout">Дата выезда</label>
+              <input
+                type="text"
+                id="date-checkout"
+                name="endDate"
+                class="datepicker form-input"
+                placeholder="Выберите дату выезда"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="adults">Количество взрослых</label>
+              <input
+                type="number"
+                id="adults"
+                name="adults"
+                min="1"
+                value="1"
+                class="form-input"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="children">Количество детей</label>
+              <input
+                type="number"
+                id="children"
+                name="children"
+                min="0"
+                value="0"
+                class="form-input"
+              />
+            </div>
+            <input
+              type="hidden"
+              id="total_guests"
+              name="totalPeople"
+              value="1"
+            />
+            <button type="button" id="filter-button" class="submit-button">
+              Забронировать
+            </button>
+          </form>
+        </section>
+
+        <section class="info-section">
+          <h2>Дополнительные услуги</h2>
+          <div class="services-list">
+            <div class="service-item">
+              <span class="service-name">Тапчан</span>
+              <span class="service-price">3 500₸</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">Мал. Тапчан</span>
+              <span class="service-price">2 000₸</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">Беседка</span>
+              <span class="service-price">2 000₸</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">Баня</span>
+              <span class="service-price">4 000₸</span>
+            </div>
+            <div class="service-item">
+              <span class="service-name">Терасса</span>
+              <span class="service-price">2 500₸</span>
+            </div>
+            <div class="service-item total-price-item">
+              <span class="service-name">Итого за период:</span>
+              <span class="service-price" id="total-price">0₸</span>
+            </div>
+          </div>
+          <p class="info-note">
+            * Данные услуги можете приобрести только на территории базы отдыха
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <div th:replace="~{fragments/footer}"></div>
+
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close-popup">×</span>
+        <h3>Успех!</h3>
+        <p id="popup-message"></p>
+        <button class="ok-button">OK</button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="/static/js/booking.js"></script>
+  </body>
+</html>

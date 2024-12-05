@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Golden Fish</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      window.onscroll = function () {
+        const header = document.querySelector("header");
+        if (window.pageYOffset > 0) {
+          header.style.position = "fixed";
+          header.style.top = "0";
+          header.style.width = "100%";
+          header.style.backdropFilter = "blur(8px)";
+          header.style.webkitBackdropFilter = "blur(8px)";
+          header.classList.add("active");
+        } else {
+          header.style.position = "absolute";
+
+          header.style.backdropFilter = "none";
+          header.classList.remove("active");
+          header.style.webkitBackdropFilter = "none";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <!-- Вставка хедера через фрагмент -->
+    <div th:replace="~{fragments/header}"></div>
+
+    <div class="hero" style="height: 1000px">
+      <div class="video-background">
+        <video autoplay muted loop id="background-video">
+          <source src="/static/videos/background.mp4" type="video/mp4" />
+          Ваш браузер не поддерживает видео.
+        </video>
+      </div>
+    </div>
+
+    <!-- Дома -->
+    <div class="section section-homes" id="homes">
+      <div class="text-left">
+        <h2>Дома</h2>
+        <p>
+          У нас есть 10 двухэтажных домов, каждый из которых уютно вмещает
+          большую семью. В каждом доме есть все необходимые удобства для
+          комфортного проживания. Отличное место для отдыха с друзьями и семьей.
+        </p>
+      </div>
+      <div class="image-right">
+        <img src="/static/img/homes.png" alt="Дома" />
+      </div>
+    </div>
+
+    <!-- Бани -->
+    <div class="section section-baths" id="baths">
+      <div class="image-right">
+        <img src="/static/img/baths.png" alt="Бани" />
+      </div>
+      <div class="text-left">
+        <h2>Бани</h2>
+        <p>
+          Мы предлагаем 5 различных бань, каждая из которых идеально подходит
+          для отдыха и восстановления сил. Выберите баню по своему вкусу и
+          наслаждайтесь процессом.
+        </p>
+      </div>
+    </div>
+
+    <!-- Беседки -->
+    <div class="section section-gazebos" id="gazebos">
+      <div class="text-left">
+        <h2>Беседки</h2>
+        <p>
+          Для приятного времяпрепровождения на свежем воздухе мы предлагаем
+          уютные беседки, где можно отдохнуть с друзьями или семьей. Каждая
+          беседка оформлена с любовью и вниманием к деталям.
+        </p>
+      </div>
+      <div class="image-right">
+        <img src="/static/img/gazebos.png" alt="Беседки" />
+      </div>
+    </div>
+
+    <!-- Детский уголок -->
+    <div class="section section-children-area" id="children-area">
+      <div class="text-left">
+        <h2>Детский уголок</h2>
+        <p>
+          Наш детский уголок - это место, где дети могут играть, развлекаться и
+          наслаждаться безопасными играми. Внимание к деталям и безопасность -
+          наш приоритет.
+        </p>
+      </div>
+      <div class="image-right">
+        <img src="/static/img/area.png" alt="Детский уголок" />
+      </div>
+    </div>
+
+    <!-- Пляж -->
+    <div class="section section-beach" id="beach">
+      <div class="image-right">
+        <img src="/static/img/beach.png" alt="Пляж" />
+      </div>
+      <div class="text-left">
+        <h2>Пляж</h2>
+        <p>
+          Наш пляж - это идеальное место для отдыха и развлечений. Чистая вода,
+          песок и комфортное место для отдыха сделают ваш день незабываемым.
+        </p>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="section section-map" id="map">
+      <div class="text-left">
+        <h2>Как добраться</h2>
+        <p>
+          База отдыха Golden Fish находится на берегу озера Жалтырколь, в 12 км
+          от поста ГАИ по Карагандинской трассе.
+        </p>
+      </div>
+      <div class="map-container">
+        <a
+          class="dg-widget-link"
+          href="http://2gis.kz/nur_sultan/firm/70000001028775404/center/71.82246029376985,50.99931780618395/zoom/18?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap"
+          >Посмотреть на карте Астаны</a
+        >
+        <div class="dg-widget-link">
+          <a
+            href="http://2gis.kz/nur_sultan/firm/70000001028775404/photos/70000001028775404/center/71.82246029376985,50.99931780618395/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos"
+            >Фотографии компании</a
+          >
+        </div>
+        <div class="dg-widget-link">
+          <a
+            href="http://2gis.kz/nur_sultan/center/71.822385,50.999044/zoom/18/routeTab/rsType/bus/to/71.822385,50.999044╎Golden Fish, зона отдыха?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route"
+            >Найти проезд до Golden Fish, зона отдыха</a
+          >
+        </div>
+        <script
+          charset="utf-8"
+          src="https://widgets.2gis.com/js/DGWidgetLoader.js"
+        ></script>
+        <script charset="utf-8">
+          new DGWidgetLoader({
+            width: 640,
+            height: 600,
+            borderColor: "#a3a3a3",
+            pos: { lat: 50.99931780618395, lon: 71.82246029376985, zoom: 18 },
+            opt: { city: "nur_sultan" },
+            org: [{ id: "70000001028775404" }],
+          });
+        </script>
+        <noscript style="color: #c00; font-size: 16px; font-weight: bold"
+          >Виджет карты использует JavaScript. Включите его в настройках вашего
+          браузера.</noscript
+        >
+      </div>
+    </div>
+
+    <!-- Вставка футера через фрагмент -->
+    <div th:replace="~{fragments/footer}"></div>
+  </body>
+</html>
+
+<script>
+  function reveal() {
+    const sections = document.querySelectorAll(".section");
+
+    sections.forEach((section) => {
+      const sectionTop = section.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (sectionTop < windowHeight - 150) {
+        section.classList.add("reveal");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", reveal);
+  reveal();
+</script>

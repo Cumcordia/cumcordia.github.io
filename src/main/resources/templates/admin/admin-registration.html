@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация - Golden Fish</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="booking-section">
+  <h2>Регистрация</h2>
+  <form class="booking-form" th:action="@{/admin-registration}" method="post">
+    <div class="form-group">
+      <label for="username">Имя пользователя:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Номер:</label>
+      <input type="tel" id="phone" name="phone" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div class="form-group">
+      <label for="confirm_password">Подтверждение пароля:</label>
+      <input type="password" id="confirm_password" name="confirm_password" required>
+    </div>
+    <button type="submit" class="submit-button">Зарегистрироваться</button>
+  </form>
+  <p>Уже есть аккаунт? <a th:href="@{/login}">Войти</a></p>
+</div>
+</body>
+</html>
